@@ -1,2 +1,2 @@
-# Project Name Holder
-Project description holder
+# Check-Your-Sum
+Checksum Tool

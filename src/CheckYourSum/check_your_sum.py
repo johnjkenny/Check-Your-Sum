@@ -7,7 +7,7 @@ or string. It also checks the integrity of a file or string by comparing hash su
 
 
 __author__ = 'John J Kenny'
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 
 from argparse import ArgumentParser

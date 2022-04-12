@@ -48,17 +48,17 @@ create_hash() will print the hash to the console on a successful run. It will re
 ``` python
 check_sum = CheckSum(ingest='test_string', ingest_type='string', hash_type='sha256').create_hash()
 print(check_sum)
-'''
+```
 Output as png:
 ![message Sample](/assets/output_tuple_example.png)
 
 create_all_hashes() will print the hash to the console on a successful run of each hash algorithm. It will return a
 dictionary containing the hash algorithm (key) and the hash (value).
-''' python
+``` python
 check_sum = CheckSum(ingest='test_string', ingest_type='string').create_all_hashes()
 for key, value in check_sum.items():
     print('{}: {}'.format(key, value))
-'''
+```
 Output as png:
 ![message Sample](/assets/output_dictionary_key_value.png)
 
@@ -66,7 +66,7 @@ Output as png:
 ISO file and checksum provided by [Ubuntu](https://ubuntu.com/download/desktop/thank-you?version=20.04.4&architecture=amd64#)
 
 #### Successful Check:
-''' python
+``` python
 config = {
     'ingest': 'ubuntu-20.04.4-desktop-amd64.iso',
     'ingest_type': 'file',
@@ -75,12 +75,12 @@ config = {
 }
 hash_created = CheckSum(**config).create_hash()
 print(hash_created)
-'''
+```
 Output as png:
 ![message Sample](/assets/verify_sum_success_example.png)
 
 #### Failed Check:
-''' python
+``` python
 config = {
     'ingest': 'ubuntu-20.04.4-desktop-amd64.iso',
     'ingest_type': 'file',
@@ -89,7 +89,7 @@ config = {
 }
 hash_created = CheckSum(**config).create_hash()
 print(hash_created)
-'''
+```
 Output as png:
 ![message Sample](/assets/verify_sum_fail_example.png)
 

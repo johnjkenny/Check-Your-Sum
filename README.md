@@ -49,7 +49,7 @@ create_hash() will print the hash to the console on a successful run. It will re
 check_sum = CheckSum(ingest='test_string', ingest_type='string', hash_type='sha256').create_hash()
 print(check_sum)
 ```
-Output as png:
+Output as png:<br>
 ![message Sample](/assets/output_tuple_example.png)
 
 create_all_hashes() will print the hash to the console on a successful run of each hash algorithm. It will return a

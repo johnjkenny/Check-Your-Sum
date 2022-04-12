@@ -7,7 +7,7 @@ or string. It also checks the integrity of a file or string by comparing hash su
 
 
 __author__ = 'John J Kenny'
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 
 from argparse import ArgumentParser
@@ -28,20 +28,20 @@ class CheckSum(PrettifyLogging):
 
         key: name = (str) Name of the log file to be created. Default is 'check_your_sum.log'.
 
-        key: ingest = (str) File or string to be hashed.
+        key: ingest = (str) [Required] File or string to be hashed.
 
         key: ingest_type = (str) Type of data to be hashed. Default is 'file'.
 
         key: hash_type = (str) Type of hash to be created. Default is 'sha256'.
 
-        key: verify_sum = (str) Checksum to be verified.
+        key: verify_sum = (str) Checksum to be verified. Default is None.
         """
         super().__init__()
         self.hash_algorithm = None
         self.name = kwargs['name'] if 'name' in kwargs else 'check-your-sum.log'
         self.ingest = kwargs['ingest'] if 'ingest' in kwargs else None
-        self.ingest_type = str(kwargs['ingest_type']).lower() if 'ingest_type' in kwargs else None
-        self.hash_type = kwargs['hash_type'] if 'hash_type' in kwargs else None
+        self.ingest_type = str(kwargs['ingest_type']).lower() if 'ingest_type' in kwargs else 'file'
+        self.hash_type = kwargs['hash_type'] if 'hash_type' in kwargs else 'sha256'
         self.verify_sum = kwargs['verify_sum'] if 'verify_sum' in kwargs else None
         self.hashes = {'md5': md5, 'sha1': sha1, 'sha224': sha224, 'sha256': sha256, 'sha384': sha384, 'sha512': sha512}
         self.log = self.configure()

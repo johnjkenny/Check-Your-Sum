@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 
 
+"""Check-Your-Sum is a tool that allows you to create md5, sha1, sha224, sha256, sha384, and sha512 hash sums for a file
+or string. It also checks the integrity of a file or string by comparing hash sums.
+"""
+
+
 __author__ = 'John J Kenny'
 __version__ = '1.0.0'
 
@@ -13,7 +18,24 @@ from PrettifyLogging.prettify_logging import PrettifyLogging
 
 
 class CheckSum(PrettifyLogging):
+    """Creates a hash sum for a file or string from user input arguments. Inherits from PrettifyLogging to aid in
+    logging of errors.
+    """
     def __init__(self, **kwargs):
+        """Initializes the CheckSum class.
+
+        kwarg options:
+
+        key: name = (str) Name of the log file to be created. Default is 'check_your_sum.log'.
+
+        key: ingest = (str) File or string to be hashed.
+
+        key: ingest_type = (str) Type of data to be hashed. Default is 'file'.
+
+        key: hash_type = (str) Type of hash to be created. Default is 'sha256'.
+
+        key: verify_sum = (str) Checksum to be verified.
+        """
         super().__init__()
         self.hash_algorithm = None
         self.name = kwargs['name'] if 'name' in kwargs else 'check-your-sum.log'
@@ -25,6 +47,14 @@ class CheckSum(PrettifyLogging):
         self.log = self.configure()
 
     def get_hash_algorithm(self, hash_type: str = 'sha256'):
+        """Returns the hash algorithm object based on the hash type.
+
+        Args:
+            hash_type (str, optional): Hash algorithm name to be used in hashing. Defaults to 'sha256'.
+
+        Returns:
+            _Hash or None: Returns the hash algorithm object or None if the hash type is not found.
+        """
         if self.hash_type is not None:
             try:
                 return self.hashes[hash_type.lower()]()
@@ -36,6 +66,11 @@ class CheckSum(PrettifyLogging):
         return None
 
     def create_hash(self):
+        """Creates a hash sum for the ingest data.
+
+        Returns:
+            tuple: Returns a tuple containing the hash sum and a boolean value indicating if the hash sum was verified.
+        """
         self.hash_algorithm = self.get_hash_algorithm(self.hash_type)
         if self.hash_algorithm is not None:
             error_found = self._run_ingest_type()
@@ -44,6 +79,11 @@ class CheckSum(PrettifyLogging):
         return None, None
 
     def _run_ingest_type(self):
+        """Runs the ingest type to create a hash sum.
+
+        Returns:
+            bool: Returns True if an error was found. Else False.
+        """
         if self.ingest_type == 'file':
             return self._try_read_file()
         if self.ingest_type == 'string':
@@ -52,6 +92,11 @@ class CheckSum(PrettifyLogging):
         return True
 
     def _create_digest(self):
+        """Creates a hash sum for the ingest data.
+
+        Returns:
+            tuple: Returns a tuple containing the hash sum and a boolean value indicating if the hash sum was verified.
+        """
         digest = self.hash_algorithm.hexdigest()
         if self.verify_sum is not None:
             if digest == self.verify_sum:
@@ -65,6 +110,11 @@ class CheckSum(PrettifyLogging):
         return digest, None
 
     def create_all_hashes(self):
+        """Creates all hash sums for the ingest data.
+
+        Returns:
+            dict: Returns a dictionary containing the hash sums for each hash type.
+        """
         self.verify_sum = None
         hash_dict = dict()
         for hash_type in self.hashes:
@@ -73,6 +123,11 @@ class CheckSum(PrettifyLogging):
         return hash_dict
 
     def _try_read_file(self):
+        """Attempts to read the ingest file.
+
+        Returns:
+            bool: Returns True if an error was found. Else False.
+        """
         if isinstance(self.ingest, str) and isfile(self.ingest):
             try:
                 with open(self.ingest, 'rb') as file:
@@ -88,6 +143,11 @@ class CheckSum(PrettifyLogging):
         return True
 
     def _encode_string(self):
+        """Encodes the ingest string.
+
+        Returns:
+            bool: Returns True if an error was found. Else False.
+        """
         if isinstance(self.ingest, str):
             self.hash_algorithm.update(self.ingest.encode('utf-8'))
             return False
@@ -96,7 +156,9 @@ class CheckSum(PrettifyLogging):
 
 
 class ArgParser(ArgumentParser):
+    """ArgParser is a wrapper for the ArgumentParser class. It initializes user command line arguments."""
     def __init__(self):
+        """Initializes the ArgParser class."""
         super().__init__()
         self.hash_types = list(CheckSum().hashes.keys())
         self.hash_types.append('all')
@@ -105,6 +167,7 @@ class ArgParser(ArgumentParser):
         self.args = vars(self.parse_args())
 
     def _add_arguments(self):
+        """Adds the command line arguments to the parser."""
         self.add_argument('-i', '--ingest', help='File or string to be hashed', required=True)
         self.add_argument('-it', '--ingest_type', nargs='?', choices=['file', 'string'], default='file',
                           help='Type of ingest (default: %(default)s)')

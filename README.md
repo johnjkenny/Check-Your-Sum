@@ -124,7 +124,7 @@ check-your-sum -i test -it string
 
 #### 4. Importing the ArgParser class into your script:
 ``` python
-from checkYourSum.check_your_sum import ArgParser, CheckSum
+from CheckYourSum.check_your_sum import ArgParser, CheckSum
 
 
 if __name__ == '__main__':

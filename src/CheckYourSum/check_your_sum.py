@@ -41,7 +41,7 @@ class CheckSum(PrettifyLogging):
         self.name = kwargs['name'] if 'name' in kwargs else 'check-your-sum.log'
         self.ingest = kwargs['ingest'] if 'ingest' in kwargs else None
         self.ingest_type = str(kwargs['ingest_type']).lower() if 'ingest_type' in kwargs else None
-        self.hash_type = kwargs['hash_type'] if 'hash_type' in kwargs else None
+        self.hash_type = kwargs['hash_type'] if 'hash_type' in kwargs else 'sha256'
         self.verify_sum = kwargs['verify_sum'] if 'verify_sum' in kwargs else None
         self.hashes = {'md5': md5, 'sha1': sha1, 'sha224': sha224, 'sha256': sha256, 'sha384': sha384, 'sha512': sha512}
         self.log = self.configure()

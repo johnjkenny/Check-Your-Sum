@@ -106,24 +106,20 @@ Configuring Check-Your-Sum as a command line tool can be done in the following w
 ``` bash
 python lib/python3.8/site-packages/CheckYourSum/check_your_sum.py -i ubuntu-20.04.4-desktop-amd64.iso -it file -ht sha256 -vs f92f7dca5bb6690e1af0052687ead49376281c7b64fbe4179cc44025965b7d1c
 ```
-Output as png:
-![message Sample](/assets/cli_pip_install_path_example.png)
 
 #### 2. Creating a command alias in your shell config file to run Check-Your-Sum:
+.zshrc is used in this example because I am using the zsh shell. You can change this to your shell config file.
 ``` bash
 echo 'alias check-your-sum="python /home/user1/.local/lib/python3.8/site-packages/CheckYourSum/check_your_sum.py"' >> .zshrc
 source .zshrc
 check-your-sum -i test -it string
 ```
-Output as png:
-![message Sample](/assets/cli_shell_alias_example.png)
 
 #### 3. Creating a Symbolic Link to Check-Your-Sum:
 ``` bash
 chmod +x /home/user1/.local/lib/python3.8/site-packages/checkYourSum/check_your_sum.py
 ln -s /home/user1/.local/lib/python3.8/site-packages/checkYourSum/check_your_sum.py /home/user1/.local/bin/check-your-sum
 check-your-sum -i test -it string 
-sha256: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
 ```
 
 #### 4. Importing the ArgParser class into your script:

@@ -111,22 +111,17 @@ Output as png:
 
 #### 2. Creating a command alias in your shell config file to run Check-Your-Sum:
 ``` bash
-pip show check-your-sum | grep -i location
-Location: /home/jk/.local/lib/python3.8/site-packages
-echo 'alias check-your-sum="python /home/jk/.local/lib/python3.8/site-packages/CheckYourSum/check_your_sum.py"' >> .zshrc
+echo 'alias check-your-sum="python /home/user1/.local/lib/python3.8/site-packages/CheckYourSum/check_your_sum.py"' >> .zshrc
 source .zshrc
 check-your-sum -i test -it string
-sha256: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
 ```
 Output as png:
 ![message Sample](/assets/cli_shell_alias_example.png)
 
 #### 3. Creating a Symbolic Link to Check-Your-Sum:
 ``` bash
-chmod +x /home/jk/.local/lib/python3.8/site-packages/checkYourSum/check_your_sum.py
-ln -s /home/jk/.local/lib/python3.8/site-packages/checkYourSum/check_your_sum.py /home/jk/.local/bin/check-your-sum
-whereis check-your-sum
-check-your-sum: /home/jk/.local/bin/check-your-sum
+chmod +x /home/user1/.local/lib/python3.8/site-packages/checkYourSum/check_your_sum.py
+ln -s /home/user1/.local/lib/python3.8/site-packages/checkYourSum/check_your_sum.py /home/user1/.local/bin/check-your-sum
 check-your-sum -i test -it string 
 sha256: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
 ```
@@ -147,15 +142,7 @@ if __name__ == '__main__':
 ```
 ``` bash
 ./my_script.py -i test -it string
-sha256: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
-
 ./my_script.py -i test -it string -ht all
-md5: 098f6bcd4621d373cade4e832627b4f6
-sha1: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3
-sha224: 90a3ed9e32b2aaf4c61c410eb925426119e1a9dc53d4286ade99a809
-sha256: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
-sha384: 768412320f7b0aa5812fce428dc4706b3cae50e02a64caa16a782249bfe8efc4b7ef1ccb126255d196047dfedf17a0a9
-sha512: ee26b0dd4af7e749aa1a8ee3c10ae9923f618980772e473f8819a5d4940e0db27ac185f8a0e1d5f84f88bc887fd67b143732c304cc5fa9ad8e6f57f50028a8ff
 ```
 Output as png:
 ![message Sample](/assets/cli_importing_argparser_into_project_example.png)
